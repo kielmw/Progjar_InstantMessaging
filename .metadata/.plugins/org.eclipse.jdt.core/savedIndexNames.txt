@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\ONEDRIVE NEW\OneDrive - Institut Teknologi Sepuluh Nopember\KULIAH\SEMESTER 6\PROGJAR\Tugas_3_InstantMessage\.metadata\.plugins\org.eclipse.jdt.core
+2519165821.index
+1660015756.index
+1865797976.index
