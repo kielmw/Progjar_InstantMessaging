@@ -31,25 +31,25 @@ public class Client {
             System.out.print("Enter your username: ");
             String username = reader.readLine();
             
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
 
-            oos.writeObject(username);
-            oos.flush();
+            objectOutputStream.writeObject(username);
+            objectOutputStream.flush();
 
             Thread inputThread = new Thread(() -> {
                 try {
                     while (true) {
                         String input = reader.readLine();
-                        String[] inputParts = input.split(" ", 3);
+                        String[] inputParts = input.split(" ", 2);
                         String command = inputParts[0].toLowerCase();
 
                         if (command.equals("list")) {
                             // Request online users
                             Message requestUsersMessage = new Message(username, "server");
-                            oos.writeObject(requestUsersMessage);
-                            oos.flush();
+                            objectOutputStream.writeObject(requestUsersMessage);
+                            objectOutputStream.flush();
                         } else if (command.equals("private")) {
                             // Send private message
                             if (inputParts.length != 3) {
@@ -58,14 +58,14 @@ public class Client {
                                 String receiver = inputParts[1];
                                 String content = inputParts[2];
                                 Message privateMessage = new Message(username, receiver, content);
-                                oos.writeObject(privateMessage);
-                                oos.flush();
+                                objectOutputStream.writeObject(privateMessage);
+                                objectOutputStream.flush();
                             }
                         } else {
                             // Broadcast message
                             Message broadcastMessage = new Message(username, null, input);
-                            oos.writeObject(broadcastMessage);
-                            oos.flush();
+                            objectOutputStream.writeObject(broadcastMessage);
+                            objectOutputStream.flush();
                         }
                     }
                 } catch (IOException e) {
@@ -86,7 +86,7 @@ public class Client {
             }
 
             ois.close();
-            oos.close();
+            objectOutputStream.close();
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -42,7 +42,7 @@ public class Client {
                 try {
                     while (true) {
                         String input = reader.readLine();
-                        String[] inputParts = input.split(" ", 3);
+                        String[] inputParts = input.split(" ", 2);
                         String command = inputParts[0].toLowerCase();
 
                         if (command.equals("list")) {
@@ -52,11 +52,11 @@ public class Client {
                             oos.flush();
                         } else if (command.equals("private")) {
                             // Send private message
-                            if (inputParts.length != 3) {
+                            if (inputParts.length != 2) {
                                 System.out.println("Invalid format. Usage: private <receiver> <message>");
                             } else {
-                                String receiver = inputParts[1];
-                                String content = inputParts[2];
+                                String receiver = inputParts[0];
+                                String content = inputParts[1];
                                 Message privateMessage = new Message(username, receiver, content);
                                 oos.writeObject(privateMessage);
                                 oos.flush();

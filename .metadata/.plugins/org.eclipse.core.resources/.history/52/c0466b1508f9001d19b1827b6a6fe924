@@ -42,7 +42,7 @@ public class Client {
                 try {
                     while (true) {
                         String input = reader.readLine();
-                        String[] inputParts = input.split(" ", 3);
+                        String[] inputParts = input.split(" ", 2);
                         String command = inputParts[0].toLowerCase();
 
                         if (command.equals("list")) {

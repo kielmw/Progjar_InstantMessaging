@@ -37,10 +37,8 @@ public class Server {
                 System.out.println("New client connected");
 
                 ClientHandler clientHandler = new ClientHandler(clientSocket);
-                synchronized(clients) {                	
-                	clients.add(clientHandler);
-                	clientHandler.start();
-                }
+                clients.add(clientHandler);
+                clientHandler.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,8 +81,8 @@ class ClientHandler extends Thread {
 
     public void run() {
         try {
-        	objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+            objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
             username = (String) objectInputStream.readObject();
             System.out.println("User " + username + " joined the chat.");
