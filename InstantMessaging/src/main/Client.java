@@ -47,7 +47,7 @@ public class Client {
 
                         if (command.equals("list")) {
                             // Request online users
-                            Message requestUsersMessage = new Message(username, "server");
+                            Message requestUsersMessage = new Message(username, "server", null);
                             oos.writeObject(requestUsersMessage);
                             oos.flush();
                         } else if (command.equals("private")) {
